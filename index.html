@@ -94,11 +94,12 @@
 				.append('text')
 				.text(function(d){ return d; })
 				.attr("x", function(d, i) {
-        	return i * (svgW / dataset1.length);
+        	return i * (svgW / dataset1.length) + (svgW / dataset1.length - barPadding) / 2; // Center the text on each bar
    			})
 			  .attr("y", function(d) {
-			    return svgH - (d * 2);
-			  });
+			    return svgH - (d * 2) - 5; // Move the text above the bar by 5px
+			  })
+			  .attr("text-anchor", "middle"); // Ensure the text is centered
 </script>
 </body>
 </html>
