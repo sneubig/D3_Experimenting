@@ -9,7 +9,7 @@
 
 <script type="text/javascript" src="js/d3.js"></script>
 <script>
-	var dataset = [ 5, 10, 15, 20, 25 ];
+	var dataset = [ 11, 4, 24, 20, 34, 2, 21, 13 ];
 
 	// d3.select('body').append('p').text('New Paragraph!');
 
@@ -44,6 +44,13 @@
     	var barHeight = d * 5; //Scale up by a factor of 5
     	return barHeight + "px";
 		});
+
+	// Creating an SVG
+	var svg = d3.select('body').append('svg');
+	var w = 500;
+	var h = 50;
+
+	svg.attr('width', w).attr('height', h);
 
 </script>
 </body>
