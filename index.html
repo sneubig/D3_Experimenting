@@ -114,18 +114,48 @@
   						 .append('svg')
   						 .attr('width', svgW2)
   						 .attr('height', svgH2);
+  var padding = 20;
+
+  // Linear Scales with the Scatterplot Graph
+
+		// Returns the greatest x value in the dataset
+		var xMax = d3.max(dataset2, function(d) { 
+	    return d[0]; // Returns 480
+		});
+
+		var yMax = d3.max(dataset2, function(d) {
+			return d[1];
+		});
+
+		var scale = d3.scale;
+
+		var xScale = scale.linear()
+											.domain([0, xMax])
+											.range([padding, svgW2 - padding * 2]);
+
+		var yScale = scale.linear()
+											.domain([0, yMax])
+											.range([svgH2 - padding, padding]);
+
+		var rScale = scale.linear()
+											.domain([0, yMax])
+											.range([2, 5]) // The radius values will always fall within the range of 2,5
+
+		
 
  	svg2.selectAll('circle')
  			.data(dataset2)
  			.enter()
  			.append('circle')
  			.attr('cx', function(d){
- 				return d[0];
+ 				return xScale(d[0]); // The x coordinates are now scaled
  			})
  			.attr('cy', function(d){
- 				return d[1];
+ 				return yScale(d[1]);	// The y coordinates are now scaled
  			})
- 			.attr('r', 5);
+ 			.attr('r', function(d){
+ 				return rScale(d[1]);
+ 			});
 
  	svg2.selectAll('text')
  			.data(dataset2)
@@ -135,13 +165,16 @@
  				return d[0] + ',' + d[1];
  			})
  			.attr('x', function(d){
- 				return d[0];
+ 				return xScale(d[0]);
  			})
  			.attr('y', function(d){
- 				return d[1];
+ 				return yScale(d[1]);
  			})
  			.attr("font-family", "sans-serif")
    		.attr("fill", "red");
+
+
+
 
 
 </script>
