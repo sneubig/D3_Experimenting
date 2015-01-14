@@ -4,3 +4,10 @@ div.bar {
     background-color: teal;
     margin-right: 2px;
 }
+
+svg{
+	display: block;
+	margin: 5em auto;
+	padding: 2em;
+	border: 1px solid black;
+}
