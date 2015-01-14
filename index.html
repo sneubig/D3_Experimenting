@@ -25,13 +25,25 @@
 	// d3.select('body').selectAll('p').data(dataset).enter().append('p').text(function(d) { return "I can count up to: " + d; });
 
 	// Add styling based on the returned data
-	d3.select('body').selectAll('p').data(dataset).enter().append('p').text(function(d) { return "I can count up to: " + d; }).style("color", function(d) {
-    if (d > 15) {
-        return "red";
-    } else {
-        return "black";
-    }
-});
+	// d3.select('body').selectAll('p').data(dataset).enter().append('p').text(function(d) { return "I can count up to: " + d; }).style("color", function(d) {
+ //    if (d > 15) {
+ //        return "red";
+ //    } else {
+ //        return "black";
+ //    }
+	// });
+	
+	// A bar chart with each bars height based on each data value
+	d3.select('body')
+		.selectAll('div')
+		.data(dataset)
+		.enter()
+		.append('div')
+		.attr('class', 'bar').
+		style("height", function(d) {
+    	var barHeight = d * 5; //Scale up by a factor of 5
+    	return barHeight + "px";
+		});
 
 </script>
 </body>
