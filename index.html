@@ -61,6 +61,29 @@
 	circles.attr('cx', function(d, i) { return (i * 50) + 25; })
 				.attr('cy', h/2)
 				.attr('r', function(d) { return d; })
+
+
+	// Bar Chart using SVG images
+	var svg1 = d3.select('body').append('svg');
+	var svgW = 400;
+	var svgH = 100;
+	var barPadding = 1;
+	var barSVG = svg1.attr('width', svgW).attr('height', svgH);
+
+	barSVG.selectAll('rect')
+				.data(dataset1)
+				.enter()
+				.append('rect')
+				.attr('x', function(d, i){
+					return i * (w / dataset.length);  //the x value is now tied directly to the width of the SVG (w) and the number of values in the data set (dataset.length)
+				})
+				.attr('y', function(d){
+					return h - d * 2;
+				})
+				.attr('width', w / dataset.length - barPadding) //Set the bar widths to be proportional
+				.attr('height', function(d){
+					return d * 2;
+				});
 </script>
 </body>
 </html>
