@@ -106,15 +106,16 @@
 // Scatterplot Graph
 	var dataset2 = [
                 [5, 20], [480, 90], [250, 50], [100, 33], [330, 95],
-                [410, 12], [475, 44], [25, 67], [85, 21], [220, 88]
+                [410, 12], [475, 44], [25, 67], [85, 21], [220, 88], [600, 150]
               ];
   var svgW2 = 500;
-  var svgH2 = 100;
+  var svgH2 = 200;
   var svg2 = d3.select('body')
   						 .append('svg')
   						 .attr('width', svgW2)
   						 .attr('height', svgH2);
   var padding = 20;
+
 
   // Linear Scales with the Scatterplot Graph
 
@@ -129,18 +130,32 @@
 
 		var scale = d3.scale;
 
+		// Define X Scale
 		var xScale = scale.linear()
 											.domain([0, xMax])
 											.range([padding, svgW2 - padding * 2]);
 
+		// Define Y Scale
 		var yScale = scale.linear()
 											.domain([0, yMax])
 											.range([svgH2 - padding, padding]);
 
+		// Define Radius Scale
 		var rScale = scale.linear()
 											.domain([0, yMax])
 											.range([2, 5]) // The radius values will always fall within the range of 2,5
 
+		// Define X Axis
+		var xAxis = d3.svg.axis()
+											.scale(xScale)
+											.orient('bottom')
+											.ticks(5); // Roughly # of ticks, D3 will override this number with the most human readable amount
+
+		// Define Y Axis
+		var yAxis = d3.svg.axis()
+											.scale(yScale)
+											.orient('left')
+											.ticks(5);
 		
 
  	svg2.selectAll('circle')
@@ -172,6 +187,17 @@
  			})
  			.attr("font-family", "sans-serif")
    		.attr("fill", "red");
+
+  svg2.append("g")
+  		.attr('class', 'axis')
+  		.attr('transform', 'translate(0,' + (svgH2 - padding) + ')') // Pushes the axis to the bottom of the svg
+      .call(xAxis);
+
+  svg2.append('g')
+  		.attr('class', 'axis')
+  		.attr('transform', 'translate(' + padding + ',0)')
+			.call(yAxis);
+
 
 
 
