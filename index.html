@@ -215,9 +215,17 @@
 
 
 // Pie Chart Padding
-	var dataset3 = [12, 43, 23, 10, 4];
-	var pieWidth = 960;
-	var pieHeight = 500;
+	//Dynamic, random dataset
+	var dataset3 = [];
+	var numDataPoints = 5;
+	var xRange = Math.random() * 1000;
+	for (var i = 0; i < numDataPoints; i++) {
+	    var newNumber1 = Math.round(Math.random() * xRange);
+	    dataset3.push([newNumber1]);
+	}
+
+	var pieWidth = 500;
+	var pieHeight = 200;
 	var pieRadius = pieHeight / 2 - 10;
 
 	var arc = d3.svg.arc()
